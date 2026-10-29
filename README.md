@@ -21,8 +21,6 @@ javac -encoding UTF-8 -d out jogo/*.java jogador/*.java Velha.java
 java -cp out Velha
 ```
 
-Para instalar o JDK no Ubuntu/Debian: `sudo apt install default-jdk`.
-
 Durante a partida, a posição é escolhida digitando a **linha** e a **coluna** (de 1 a 3):
 
 ```
@@ -48,11 +46,6 @@ Durante a partida, a posição é escolhida digitando a **linha** e a **coluna**
     ├── JogadorImbativel.java     → computador imbatível (minimax)
     └── Teclado.java              → leitor de teclado compartilhado
 ```
-
-### Como as classes se encaixam
-
-`JogadorHumano`, `JogadorAutomatico` e `JogadorImbativel` implementam a interface `Jogador`. Por isso a classe `Velha` não precisa saber quem está jogando: ela só chama `jogador.facaSuaJogada()` (**polimorfismo**). Foi isso que tornou simples acrescentar o modo de dois jogadores e o computador imbatível: bastou criar novos `Jogador`.
-
 ## Como o computador imbatível funciona
 
 O `JogadorImbativel` usa o algoritmo **minimax**:
@@ -62,10 +55,4 @@ O `JogadorImbativel` usa o algoritmo **minimax**:
 3. Dá uma nota a cada final: **positiva** se ele ganha (quanto mais rápido, melhor), **zero** se empata e **negativa** se perde.
 4. Supõe que o adversário sempre escolhe a jogada pior para ele, e escolhe a jogada com a melhor nota.
 
-Como o jogo da velha é pequeno (poucas centenas de milhares de partidas possíveis), ele analisa tudo em milissegundos. Entre jogadas de mesma nota, prefere o centro, depois os cantos, depois os lados.
-
 Foi testado contra **todas** as sequências possíveis de jogadas do adversário (quase 25 mil partidas, jogando como X e como O, começando ou não): nenhuma derrota.
-
-## Conceitos de Java usados
-
-Interface, polimorfismo, encapsulamento, imutabilidade (`Marca`), pacotes, tratamento de exceções, `equals`/`hashCode`/`toString`, construtor de cópia e `clone`, matrizes e recursão (minimax).
